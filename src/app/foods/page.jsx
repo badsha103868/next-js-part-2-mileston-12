@@ -4,6 +4,10 @@ import CartItems from './CartItems';
 import InputSearch from '@/Components/InputSearch';
    
 
+// generate static params
+export function generateStaticParams(){
+  return [{id:"52898"},{id:"52755"},{id:"529555"},]
+}
 const getFoods = async (search)=>{
   const res = await fetch(`https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${search}`)
   const data = await res.json();
