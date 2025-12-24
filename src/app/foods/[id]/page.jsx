@@ -1,7 +1,10 @@
 import Link from "next/link";
 import React from "react";
 
-
+// generate static params
+export function generateStaticParams(){
+  return [{id:"52898"},{id:"52755"},{id:"529555"}]
+}
 
 const getSingleFood = async (id) => {
   const res = await fetch(
