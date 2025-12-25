@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import CartButton from "../buttons/CartButton";
+import Image from "next/image";
 
 const FoodCard = ({ food }) => {
   const { title, foodImg, price, category,id } = food;
@@ -10,11 +11,15 @@ const FoodCard = ({ food }) => {
     <div className="border rounded-lg shadow-md p-4 hover:shadow-lg transition flex flex-col h-full">
       
       {/* Image */}
-      <img
+      {/* <img
         src={foodImg}
         alt={title}
         className="w-full h-48 object-cover rounded-md"
-      />
+      /> */}
+
+      <Image width={300} height={150} src={foodImg}
+        alt={title}
+        className="w-full h-48 object-cover rounded-md"></Image>
 
       {/* Content */}
       <div className="mt-3 flex flex-col flex-1">

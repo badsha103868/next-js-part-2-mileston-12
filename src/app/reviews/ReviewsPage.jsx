@@ -3,6 +3,12 @@
 import ReviewCard from '@/Components/cards/ReviewCard';
 import React, { useEffect, useState } from 'react';
 import ReviewLoading from './ReviewLoading';
+import { Anek_Bangla } from 'next/font/google';
+
+// font set
+ const anek = Anek_Bangla({
+  weight:["400"],
+ })
 
 const ReviewsPage = () => {
   const [reviews, setReviews] = useState([]);
@@ -21,7 +27,7 @@ const ReviewsPage = () => {
   }
 
   return (
-   <div>
+   <div className={anek.className}>
       <h2 className='text-4xl font-bold'>Total <span className='text-yellow-500'>{reviews.length}</span> Reviews Found</h2>
       <div className='grid my-5 grid-cols-1 md:grid-cols-3  gap-5'>
         {
