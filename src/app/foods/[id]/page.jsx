@@ -6,6 +6,31 @@ export function generateStaticParams(){
   return [{id:"52898"},{id:"52755"},{id:"529555"}]
 }
 
+// meta data generate for food details page
+export async function generateMetadata({ params }) {
+  const { id } =await params;
+
+  console.log("Metadata ID:", id); // 👉 Terminal এ দেখবে
+
+  const res = await fetch(
+    `https://taxi-kitchen-api.vercel.app/api/v1/foods/${id}`,
+    { cache: "no-store" }
+  );
+
+  const data = await res.json();
+  const details = data?.details || {};
+
+  return {
+    title: details.title || "Food Details",
+    description: "Best Restaurant in Khulna",
+  };
+}
+// export const metadata = {
+//   title: "Foods Datails",
+//   description: "Best Restaurant in Khulna",
+// };
+
+
 const getSingleFood = async (id) => {
   const res = await fetch(
     `https://taxi-kitchen-api.vercel.app/api/v1/foods/${id}`

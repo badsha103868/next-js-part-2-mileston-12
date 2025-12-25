@@ -6,13 +6,18 @@ import InputSearch from '@/Components/InputSearch';
 
 
 const getFoods = async (search)=>{
-  const res = await fetch(`https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${search}`)
+  const res = await fetch(`https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${search}`, {next: {revalidate: 10}})
   const data = await res.json();
   // loading skeleton dekhanor jonno time set 
   await new Promise ((resolve)=>setTimeout(resolve, 3000))
   return data.foods || []
 }
 
+// meta data 
+export const metadata = {
+  title: "All Foods",
+  description: "Best Restaurant in Khulna",
+};
 
 const FoodsPage =async ( { searchParams }) => {
   const { search = ""} = await searchParams;
