@@ -1,27 +1,27 @@
 "use client";
 
 import { Pencil, Trash2, Clock } from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, format } from "date-fns";
 
 const FeedbackCard = ({ feedback, onUpdate, onDelete }) => {
   const { _id, message, date } = feedback;
-
+  const parsedDate = new Date(date);
   return (
     <div className="max-w-7xl md:flex justify-between items-center  w-full bg-gray-100  rounded-xl p-5 shadow-sm hover:shadow-md transition">
-   <div>
+      <div>
         {/* Message */}
-      <p className="text-gray-800 text-base font-medium mb-3">
-        {message}
-      </p>
+        <p className="text-gray-800 text-base font-medium mb-3">{message}</p>
 
-      {/* Relative Time */}
-      <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-        <Clock size={16} />
-        <span>
-          {formatDistanceToNow(new Date(date), { addSuffix: true })}
-        </span>
+        {/* Relative Time */}
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+          <Clock size={16} />
+          <span>
+            {format(parsedDate, "dd MMM yyyy, hh:mm a")}
+            <span className="mx-2">·</span>
+            {formatDistanceToNow(parsedDate, { addSuffix: true })}
+          </span>
+        </div>
       </div>
-  </div>
 
       {/* Actions */}
       <div className="flex gap-3">
