@@ -17,8 +17,19 @@ const nextConfig = {
         pathname: '/api/portraits/**',
         search: '',
       },
+      
     ],
   },
+   async redirects() {
+    return [
+      {
+        source: '/food-details/:id',
+        destination: '/foods/:id',
+        permanent: true,
+      },
+    ]
+  },
+  
 };
 
 export default nextConfig;

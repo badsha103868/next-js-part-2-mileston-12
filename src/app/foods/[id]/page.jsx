@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
 // generate static params
@@ -48,12 +49,13 @@ const page = async ({ params }) => {
   const food = await getSingleFood(id);
 
   // আগে চেক করবেন ফুড আছে কি না, তারপর ডিস্ট্রাকচার করবেন
-  if (!food) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <h2 className="text-2xl font-bold">Food not Found</h2>
-      </div>
-    );
+  if (!food.title) {
+    redirect("/foods")
+    // return (
+    //   <div className="min-h-screen flex items-center justify-center">
+    //     <h2 className="text-2xl font-bold">Food not Found</h2>
+    //   </div>
+    // );
   }
 
   const { title, foodImg, price, category, area, video } = food;
