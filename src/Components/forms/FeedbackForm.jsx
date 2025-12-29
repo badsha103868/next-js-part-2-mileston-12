@@ -3,25 +3,31 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const FeedbackForm = () => {
+const FeedbackForm = ({ postFeedback }) => {
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = e.target.message.value;
+    // fetch kora bad diya postfeedback function k call kore diya post korbo
+    
+    const data = await postFeedback(message);
+
+
     // alert(message)
     // fetch korbo and post korbo
-    const res = await fetch(`${process.env.NEXT_PUBLIC_server}/api/feedback/`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ message }),
-    });
-    const data = await res.json();
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_server}/api/feedback/`, {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify({ message }),
+    // });
+    // const data = await res.json();
 
     if (data.insertedId) {
       // navigate kore feedback page a niya jaoua
+      alert("success")
       router.push("/feedback");
     }
   };

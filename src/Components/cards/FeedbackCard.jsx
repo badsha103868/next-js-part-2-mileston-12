@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { Pencil, Trash2, Clock } from "lucide-react";
 import { formatDistanceToNow, format } from "date-fns";
@@ -7,7 +7,7 @@ const FeedbackCard = ({ feedback, onUpdate, onDelete }) => {
   const { _id, message, date } = feedback;
   const parsedDate = new Date(date);
   return (
-    <div className="max-w-7xl md:flex justify-between items-center  w-full bg-gray-100  rounded-xl p-5 shadow-sm hover:shadow-md transition">
+    <div className=" md:flex justify-between items-center  w-full bg-gray-100  rounded-xl p-5 shadow-sm hover:shadow-md transition">
       <div>
         {/* Message */}
         <p className="text-gray-800 text-base font-medium mb-3">{message}</p>
@@ -26,7 +26,7 @@ const FeedbackCard = ({ feedback, onUpdate, onDelete }) => {
       {/* Actions */}
       <div className="flex gap-3">
         <button
-          onClick={() => onUpdate(_id)}
+          // onClick={() => onUpdate(_id)}
           className="flex items-center justify-center gap-2 flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-2 rounded-lg"
         >
           <Pencil size={18} />
@@ -34,7 +34,7 @@ const FeedbackCard = ({ feedback, onUpdate, onDelete }) => {
         </button>
 
         <button
-          onClick={() => onDelete(_id)}
+          // onClick={() => onDelete(_id)}
           className="flex items-center justify-center gap-2 flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-2 rounded-lg"
         >
           <Trash2 size={18} />

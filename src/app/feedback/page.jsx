@@ -1,23 +1,28 @@
 import FeedbackCard from "@/Components/cards/FeedbackCard";
 import Link from "next/link";
 import React from "react";
+import { connect } from "../../lib/dbConnect";
+import { getFeedback } from "@/action/server/feedback";
 
 export const dynamic = "force-dynamic"; // static string, required by Next.js
 export const metadata = { title: "feedbacks" };
 
-const getFeedback = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_server}/api/feedback/`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) throw new Error("Failed to fetch feedback");
-  return res.json();
-};
+// const getFeedback = async () => {
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_server}/api/feedback/`, {
+//     // cache:"force-cache",
+//     next: { revalidate: 60 },
+//   });
+//   if (!res.ok) throw new Error("Failed to fetch feedback");
+//   return res.json();
+// };
 
 const FeedbackPage = async () => {
   const feedback = await getFeedback();
+  // direct connect function theka feedbacks data get
+  // const feedback = await connect("feedbacks").find().toArray();
 
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <h2 className="text-2xl font-bold">{feedback.length} Feedbacks Found</h2>
       <div className="my-5">
         <Link className="btn" href="/feedback/add">

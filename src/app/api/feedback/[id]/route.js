@@ -1,67 +1,65 @@
-import { connect } from "@/app/lib/dbConnect";
+import { connect } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 
- const feedbackCollection = connect("feedbacks")
-export async function GET(request, {params}) {
-  const { id } = await params;
- if(id.length !==24){
-  return Response.json({
-    status:400,message:"send correct _id"
-  })
- }
- const query = {_id: new ObjectId(id)}
- const result =await feedbackCollection.findOne(query)
- 
+const feedbackCollection = connect("feedbacks");
 
-  return Response.json(result)
+export async function GET(request, { params }) {
+  const { id } = await params;
+  if (id.length !== 24) {
+    return Response.json({
+      status: 400,
+      message: "send correct _id",
+    });
+  }
+  const query = { _id: new ObjectId(id) };
+  const result = await feedbackCollection.findOne(query);
+
+  return Response.json(result);
 }
 // delete
-export async function DELETE(request, {params}) {
+export async function DELETE(request, { params }) {
   const { id } = await params;
- if(id.length !==24){
-  return Response.json({
-    status:400,message:"send correct _id"
-  })
- }
- const query = {_id: new ObjectId(id)}
- const result =await feedbackCollection.deleteOne(query)
- 
+  if (id.length !== 24) {
+    return Response.json({
+      status: 400,
+      message: "send correct _id",
+    });
+  }
+  const query = { _id: new ObjectId(id) };
+  const result = await feedbackCollection.deleteOne(query);
 
-  return Response.json(result)
+  return Response.json(result);
 }
 // update
 
-export async function PATCH(request, {params}) {
+export async function PATCH(request, { params }) {
   const { id } = await params;
-  const { message } = await request.json()
- 
+  const { message } = await request.json();
 
-
- if(id.length !==24){
-  return Response.json({
-    status:400,message:"send correct _id"
-  })
- }
-  
- 
-    if(!message || typeof message !== "string"){
+  if (id.length !== 24) {
     return Response.json({
       status: 400,
-      message:"please send a message"
-    })
+      message: "send correct _id",
+    });
   }
 
- const query = {_id: new ObjectId(id)}
- 
-//  update dat
-const newData ={
-  $set:{
-    message
+  if (!message || typeof message !== "string") {
+    return Response.json({
+      status: 400,
+      message: "please send a message",
+    });
   }
-}
 
- const result =await feedbackCollection.updateOne(query, newData)
- 
+  const query = { _id: new ObjectId(id) };
 
-  return Response.json(result)
+  //  update dat
+  const newData = {
+    $set: {
+      message,
+    },
+  };
+
+  const result = await feedbackCollection.updateOne(query, newData);
+
+  return Response.json(result);
 }
